@@ -306,9 +306,6 @@ fn update_ids() -> Result<(), std::io::Error> {
     if status.success() {
         Ok(())
     } else {
-        Err(std::io::Error::new(
-            std::io::ErrorKind::Other,
-            "Error fetching pci data",
-        ))
+        Err(std::io::Error::other("Error fetching pci data"))
     }
 }
