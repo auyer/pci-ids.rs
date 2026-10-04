@@ -72,10 +72,20 @@ fn main() {
     let mut vendors = Map::new();
     let mut classes = Map::new();
 
+    // Set while skipping the TAB-indented children of an unrecognized header.
+    let mut skip_indented = false;
+
     for line in input.lines() {
         let line = line.unwrap();
         if line.is_empty() || line.starts_with('#') {
             continue;
+        }
+
+        if skip_indented {
+            if line.starts_with('\t') {
+                continue;
+            }
+            skip_indented = false;
         }
 
         if let Ok((name, id)) = parser::vendor(&line) {
@@ -152,9 +162,20 @@ fn main() {
                 name: name.into(),
             });
         } else {
-            // TODO: Lots of other things that could be parsed out:
-            // Language, dialect, country code, HID types, ...
-            break;
+            // The line did not match any known entry. Per pci.ids(5), a line
+            // starting with an unrecognized letter followed by a single space
+            // (e.g. an "S" subsystem vendor) is ignored along with all of its
+            // following TAB-indented lines. Everything else is simply skipped.
+            // We never abort the parse here: doing so would silently discard
+            // the remainder of the database after a single unknown line.
+            let bytes = line.as_bytes();
+            let is_unknown_header = match bytes.first() {
+                Some(&b) if b.is_ascii_alphabetic() && b != b'C' => bytes.get(1) == Some(&b' '),
+                _ => false,
+            };
+            if is_unknown_header {
+                skip_indented = true;
+            }
         }
     }
     if let Some(vendor) = curr_vendor.take() {

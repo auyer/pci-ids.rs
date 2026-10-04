@@ -366,4 +366,159 @@ mod tests {
 
         assert_eq!(subclass, subclass2);
     }
+
+    #[test]
+    fn test_sentinel_vendor_ids() {
+        // 0xffff is the bus master-abort sentinel, but the DB carries an entry.
+        let vendor = Vendor::from_id(0xffff).unwrap();
+
+        assert_eq!(vendor.id(), 0xffff);
+        assert_eq!(vendor.name(), "Illegal Vendor ID");
+
+        // 0x0000 is forbidden by the spec and absent from the DB.
+        assert!(Vendor::from_id(0x0000).is_none());
+    }
+
+    #[test]
+    fn test_unknown_device_lookups() {
+        assert!(Device::from_vid_pid(0x0000, 0x0000).is_none());
+        assert!(Device::from_vid_pid(0xffff, 0xffff).is_none());
+        assert!(Device::from_vid_pid(0x1af4, 0xffff).is_none());
+    }
+
+    #[test]
+    fn test_virtual_vendors() {
+        // 0x1af4 is Red Hat's VirtIO range, 0x1b36 its QEMU range.
+        for vid in [0x1af4u16, 0x1b36] {
+            let vendor = Vendor::from_id(vid).unwrap();
+
+            assert_eq!(vendor.name(), "Red Hat, Inc.");
+        }
+
+        let device = Device::from_vid_pid(0x1af4, 0x1000).unwrap();
+
+        assert_eq!(device.name(), "Virtio network device");
+        assert_eq!(device.vendor().id(), 0x1af4);
+    }
+
+    #[test]
+    fn test_vanity_vendor_ids() {
+        let cases = [
+            (0xc0deu16, "Motorola"),
+            (0xcafe, "Thales"),
+            (0xdead, "Indigita Corporation"),
+            (0x1337, "Third Planet Publishing"),
+        ];
+
+        for (id, name) in cases {
+            let vendor = Vendor::from_id(id).unwrap();
+
+            assert_eq!(vendor.name(), name);
+        }
+
+        // Commonly assumed, but not actually registered.
+        assert!(Vendor::from_id(0xbeef).is_none());
+        assert!(Vendor::from_id(0xface).is_none());
+    }
+
+    #[test]
+    fn test_class_boundaries() {
+        assert_eq!(Class::from_id(0x00).unwrap().name(), "Unclassified device");
+        assert_eq!(Class::from_id(0xff).unwrap().name(), "Unassigned class");
+
+        assert!(Class::from_id(0x14).is_none());
+        assert!(Subclass::from_cid_sid(0x14, 0x00).is_none());
+        assert!(Subclass::from_cid_sid(0x01, 0xff).is_none());
+    }
+
+    #[test]
+    fn test_subsystem_zero_zero_trap() {
+        // Some boards leave the subsystem vendor/device fields unprogrammed.
+        let device = Device::from_vid_pid(0x3d3d, 0x0002).unwrap();
+
+        assert_eq!(device.name(), "GLINT 500TX");
+
+        let subsystem = device
+            .subsystems()
+            .find(|s| s.subvendor() == 0 && s.subdevice() == 0)
+            .unwrap();
+
+        assert_eq!(subsystem.name(), "GLoria L");
+    }
+
+    #[test]
+    fn test_empty_subsystems_and_prog_ifs() {
+        let device = Device::from_vid_pid(0x1af4, 0x1002).unwrap();
+
+        assert_eq!(device.name(), "Virtio memory balloon");
+        assert_eq!(device.subsystems().count(), 0);
+
+        let usb = Subclass::from_cid_sid(0x0c, 0x03).unwrap();
+
+        assert_eq!(usb.name(), "USB controller");
+        for expected in [0x00u8, 0x10, 0x20, 0x30] {
+            assert!(usb.prog_ifs().any(|p| p.id() == expected));
+        }
+
+        let unclassified = Subclass::from_cid_sid(0x00, 0x00).unwrap();
+
+        assert_eq!(unclassified.prog_ifs().count(), 0);
+    }
+
+    #[test]
+    fn test_device_vendor_roundtrip() {
+        for vendor in Vendors::iter() {
+            for device in vendor.devices() {
+                assert_eq!(device.vendor(), vendor);
+
+                let (vid, pid) = device.as_vid_pid();
+
+                assert_eq!(vid, vendor.id());
+                assert_eq!(pid, device.id());
+                assert_eq!(Device::from_vid_pid(vid, pid).unwrap(), device);
+            }
+        }
+    }
+
+    #[test]
+    fn test_subclass_class_roundtrip() {
+        for class in Classes::iter() {
+            for subclass in class.subclasses() {
+                assert_eq!(subclass.class(), class);
+
+                let (cid, sid) = subclass.as_cid_sid();
+
+                assert_eq!(cid, class.id());
+                assert_eq!(sid, subclass.id());
+                assert_eq!(Subclass::from_cid_sid(cid, sid).unwrap(), subclass);
+            }
+        }
+    }
+
+    #[test]
+    fn test_no_zero_vendor() {
+        assert!(Vendors::iter().all(|v| v.id() != 0x0000));
+    }
+
+    #[test]
+    fn test_unique_device_ids_per_vendor() {
+        for vendor in Vendors::iter() {
+            for (i, device) in vendor.devices().enumerate() {
+                for other in vendor.devices().skip(i + 1) {
+                    assert_ne!(device.id(), other.id());
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn test_unique_subclass_ids_per_class() {
+        for class in Classes::iter() {
+            for (i, subclass) in class.subclasses().enumerate() {
+                for other in class.subclasses().skip(i + 1) {
+                    assert_ne!(subclass.id(), other.id());
+                }
+            }
+        }
+    }
 }
