@@ -50,7 +50,9 @@ pub struct CgProgIf {
 fn main() {
     let out_dir = env::var_os("OUT_DIR").unwrap();
     if update_ids().is_err() {
-        println!("cargo:warning=Failed fetching pci ids, do you have internet connection ?... Using cached version");
+        println!(
+            "cargo:warning=Failed fetching pci ids, do you have internet connection ?... Using cached version"
+        );
     }
     let src_path = Path::new("pciids/pci.ids");
     let dest_path = Path::new(&out_dir).join("pci_ids.cg.rs");
