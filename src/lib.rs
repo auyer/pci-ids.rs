@@ -10,7 +10,7 @@
 //! Iterating over all known vendors:
 //!
 //! ```rust
-//! use pci_ids::Vendors;
+//! use pci_ids_rs::Vendors;
 //!
 //! for vendor in Vendors::iter() {
 //!     for device in vendor.devices() {
@@ -22,7 +22,7 @@
 //! Iterating over all known subclasses:
 //!
 //! ```rust
-//! use pci_ids::Classes;
+//! use pci_ids_rs::Classes;
 //!
 //! for class in Classes::iter() {
 //!     for subclass in class.subclasses() {
