@@ -9,16 +9,19 @@ readme = "README.md"
 homepage = "https://github.com/lienching/pci-ids.rs"
 repository = "https://github.com/lienching/pci-ids.rs"
 keywords = ["pci"]
+# minimum Rust version required
+rust-version = "1.85"
+
 categories = ["hardware-support"]
 
 [build-dependencies]
 nom = { version = "8.0", default-features = false }
-phf_codegen = "0.11"
+phf_codegen = "0.14"
 quote = "1.0"
 proc-macro2 = "1.0"
 
 [dependencies]
-phf = { version = "0.11", default-features = false }
+phf = { version = "0.14", default-features = false }
 
 [badges]
 maintenance = { status = "actively-developed" }

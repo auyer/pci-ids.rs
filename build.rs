@@ -93,7 +93,7 @@ fn main() {
         if let Ok((name, id)) = parser::vendor(&line) {
             // If there was a previous vendor, emit it.
             if let Some(vendor) = curr_vendor.take() {
-                vendors.entry(vendor.id, &quote!(#vendor).to_string());
+                vendors.entry(vendor.id, quote!(#vendor).to_string());
             }
 
             // Set our new vendor as the current vendor.
@@ -130,7 +130,7 @@ fn main() {
         } else if let Ok((name, id)) = parser::class(&line) {
             // If there was a previous class, emit it.
             if let Some(class) = curr_class.take() {
-                classes.entry(class.id, &quote!(#class).to_string());
+                classes.entry(class.id, quote!(#class).to_string());
             }
 
             // Set our new class as the current class.
@@ -181,10 +181,10 @@ fn main() {
         }
     }
     if let Some(vendor) = curr_vendor.take() {
-        vendors.entry(vendor.id, &quote!(#vendor).to_string());
+        vendors.entry(vendor.id, quote!(#vendor).to_string());
     }
     if let Some(class) = curr_class.take() {
-        classes.entry(class.id, &quote!(#class).to_string());
+        classes.entry(class.id, quote!(#class).to_string());
     }
 
     writeln!(
