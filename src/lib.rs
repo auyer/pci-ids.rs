@@ -5,6 +5,9 @@
 //! Linux userspaces; this crate vendors the PCI ID database to allow non-Linux hosts to
 //! access the same canonical information.
 //!
+//! This crate is `#![no_std]` and works on any platform supported by Rust. It requires
+//! Rust 1.85 or newer.
+//!
 //! # Usage
 //!
 //! Iterating over all known vendors:
@@ -19,7 +22,31 @@
 //! }
 //! ```
 //!
-//! Iterating over all known subclasses:
+//! Looking up a device by its vendor and device IDs:
+//!
+//! ```rust
+//! use pci_ids_rs::Device;
+//!
+//! if let Some(device) = Device::from_vid_pid(0x1af4, 0x1000) {
+//!     println!(
+//!         "{} ({:04x}:{:04x})",
+//!         device.name(),
+//!         device.vendor().id(),
+//!         device.id()
+//!     );
+//! }
+//! ```
+//!
+//! Vendors and classes can likewise be looked up by ID through the [`FromId`] trait:
+//!
+//! ```rust
+//! use pci_ids_rs::{Class, FromId, Vendor};
+//!
+//! let vendor = Vendor::from_id(0x1af4).unwrap();
+//! let class = Class::from_id(0x08).unwrap();
+//! ```
+//!
+//! Iterating over all known classes and subclasses:
 //!
 //! ```rust
 //! use pci_ids_rs::Classes;
@@ -32,6 +59,12 @@
 //! ```
 //!
 //! See the individual documentation for each structure for more details.
+//!
+//! # License
+//!
+//! Licensed under the MIT license
+//! ([LICENSE](https://github.com/auyer/pci-ids.rs/blob/main/LICENSE)
+//! or <https://opensource.org/licenses/MIT>).
 //!
 
 #![no_std]

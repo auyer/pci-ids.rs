@@ -14,7 +14,25 @@ Thanks to all previous authors.
 Cross-platform Rust wrappers for the [PCI ID Repository](https://pci-ids.ucw.cz/).
 
 This library bundles the PCI ID database, allowing platforms other than Linux to query it
-as a source of canonical PCI metadata.
+as a source of canonical PCI metadata. It is `#![no_std]` and works on any platform
+supported by Rust.
+
+## Installation
+
+Add the crate to your `Cargo.toml`:
+
+```toml
+[dependencies]
+pci-ids-rs = "0.3"
+```
+
+Or, with `cargo`:
+
+```sh
+cargo add pci-ids-rs
+```
+
+The crate requires Rust 1.85 or newer.
 
 ## Usage
 
@@ -30,7 +48,26 @@ for vendor in Vendors::iter() {
 }
 ```
 
-Iterating over all known subclasses:
+Looking up a device by its vendor and device IDs:
+
+```rust
+use pci_ids_rs::Device;
+
+if let Some(device) = Device::from_vid_pid(0x1af4, 0x1000) {
+    println!("{} ({:04x}:{:04x})", device.name(), device.vendor().id(), device.id());
+}
+```
+
+Vendors and classes can likewise be looked up by ID through the `FromId` trait:
+
+```rust
+use pci_ids_rs::{Class, FromId, Vendor};
+
+let vendor = Vendor::from_id(0x1af4).unwrap();
+let class = Class::from_id(0x08).unwrap();
+```
+
+Iterating over all known classes and subclasses:
 
 ```rust
 use pci_ids_rs::Classes;
