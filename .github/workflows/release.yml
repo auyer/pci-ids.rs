@@ -1,0 +1,29 @@
+on:
+  push:
+    tags:
+      - "v*"
+
+name: release
+
+permissions: {}
+
+jobs:
+  publish:
+    needs: create-release
+    runs-on: ubuntu-latest
+    environment:
+      name: crates.io
+      url: https://crates.io/crates/pci-ids-rs
+    permissions:
+      id-token: write # for trusted publishing to crates.io
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - uses: rust-lang/crates-io-auth-action@c6f97d42243bad5fab37ca0427f495c86d5b1a18 # v1.0.5
+        id: auth
+
+      - run: cargo publish
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
