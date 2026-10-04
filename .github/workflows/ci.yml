@@ -6,28 +6,50 @@ on:
       - main
   pull_request:
 
+permissions: {}
+
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
         with:
+          persist-credentials: false
           submodules: true
-      - name: Format
-        run: cargo fmt && git diff --exit-code
-      - name: Lint
+
+      - name: Update local toolchain
         run: |
           rustup update
           rustup component add clippy
+          rustup install stable
+
+      - name: Lint
+        run: |
+          cargo fmt -- --check
           cargo clippy -- -D warnings
+
+  spell_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Writes changes in the local checkout
+        uses: crate-ci/typos@00f422f3b19c57bc6338715ebfe3316d38768461 #v1.50.3
+        with:
+          write_changes: true
+
   test:
     runs-on: ${{ matrix.platform }}
     strategy:
       matrix:
         platform: ["ubuntu-latest", "macos-latest", "windows-latest"]
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
         with:
+          persist-credentials: false
           submodules: true
 
       - name: Build
