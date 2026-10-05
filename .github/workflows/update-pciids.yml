@@ -2,6 +2,9 @@ name: check for updates to pci.ids
 on:
   schedule:
     - cron: "0 12 * * *"
+  push:
+    branches:
+      - remove-build-time-curl-fetch
 
 permissions: {}
 
