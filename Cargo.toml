@@ -2,17 +2,22 @@
 name = "pci-ids-rs"
 description = "Rust wrappers for the PCI ID Repository"
 license = "MIT"
-version = "0.3.0"
+version = "1.2026.10"
 authors = ["Rafael Passos <rafael@rcpassos.me>", "William Woodruff <william@yossarian.net>", "Charles Lien <lienching31240@gmail.com>"]
 edition = "2024"
 readme = "README.md"
-homepage = "https://github.com/auyer/pci-ids.rs"
 repository = "https://github.com/auyer/pci-ids.rs"
 keywords = ["pci"]
 # minimum Rust version required
 rust-version = "1.85"
 
 categories = ["hardware-support"]
+
+exclude = [
+    ".git/",
+    ".github/",
+    "scripts"
+]
 
 [build-dependencies]
 nom = { version = "8.0", default-features = false }

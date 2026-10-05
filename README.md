@@ -9,7 +9,7 @@ Thanks to all previous authors.
 [![Build Status](https://img.shields.io/github/actions/workflow/status/auyer/pci-ids.rs/ci.yml?branch=main)](https://github.com/auyer/pci-ids.rs/actions?query=workflow%3ACI)
 [![Crates.io](https://img.shields.io/crates/v/pci-ids-rs)](https://crates.io/crates/pci-ids-rs)
 [![docs.rs](https://docs.rs/pci-ids-rs/badge.svg)](https://docs.rs/pci-ids-rs)
-![Debian package rust-pci-ids](https://img.shields.io/debian/v/rust-pci-ids/sid)
+[![Debian package rust-pci-ids](https://img.shields.io/debian/v/rust-pci-ids/sid)](https://tracker.debian.org/pkg/rust-pci-ids)
 
 Cross-platform Rust wrappers for the [PCI ID Repository](https://pci-ids.ucw.cz/).
 
