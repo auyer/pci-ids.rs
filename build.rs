@@ -49,12 +49,7 @@ pub struct CgProgIf {
 #[allow(clippy::redundant_field_names)]
 fn main() {
     let out_dir = env::var_os("OUT_DIR").unwrap();
-    if update_ids().is_err() {
-        println!(
-            "cargo:warning=Failed fetching pci ids, do you have internet connection ?... Using cached version"
-        );
-    }
-    let src_path = Path::new("pciids/pci.ids");
+    let src_path = Path::new("src/pci.ids");
     let dest_path = Path::new(&out_dir).join("pci_ids.cg.rs");
     let input = {
         let f = fs::File::open(src_path).unwrap();
@@ -202,7 +197,7 @@ fn main() {
     .unwrap();
 
     println!("cargo:rerun-if-changed=build.rs");
-    println!("cargo:rerun-if-changed=pciids/pci.ids");
+    println!("cargo:rerun-if-changed=src/pci.ids");
 }
 
 mod parser {
@@ -316,20 +311,5 @@ impl quote::ToTokens for CgProgIf {
         tokens.extend(quote! {
             ProgIf { id: #id, name: #name }
         });
-    }
-}
-
-fn update_ids() -> Result<(), std::io::Error> {
-    let status = std::process::Command::new("curl")
-        .arg("https://raw.githubusercontent.com/pciutils/pciids/master/pci.ids")
-        .arg("--create-dirs")
-        .arg("--output")
-        .arg("pciids/pci.ids")
-        .spawn()?
-        .wait()?;
-    if status.success() {
-        Ok(())
-    } else {
-        Err(std::io::Error::other("Error fetching pci data"))
     }
 }
