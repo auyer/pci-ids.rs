@@ -33,6 +33,14 @@ set_version() {
     sed -i "s/^version[[:space:]]*=.*/version = \"${new_version}\"/" Cargo.toml
 }
 
+# Update the dependency snippet in the README. Silently skipped if the file or
+# the expected line is missing.
+set_readme_version() {
+    local new_version="$1"
+    [ -f README.md ] || return 0
+    sed -i "s/^pci-ids-rs = \".*\"/pci-ids-rs = \"${new_version}\"/" README.md
+}
+
 mode=""
 explicit_version=""
 
@@ -103,4 +111,5 @@ case "$mode" in
 esac
 
 set_version "$new_version"
+set_readme_version "$new_version"
 echo "$new_version"
