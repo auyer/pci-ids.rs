@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 <!-- @next-header@ -->
 
+## [1.2026.10] - 2026-10-12
+
+### Changed
+
+* Update pciids snapshot to: 2026.10.07 (2026-10-07 03:15:02)
+
 ## [0.3.0] - 2026-10-04
 
 ### Changed
