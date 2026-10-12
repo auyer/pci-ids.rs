@@ -3,7 +3,7 @@ on:
     tags:
       - "v*"
 
-name: release
+name: Release
 
 permissions: {}
 
@@ -32,6 +32,10 @@ jobs:
     steps:
       - name: Release
         run: |
+          if gh release view --repo auyer/pci-ids.rs "${RELEASE_TAG}" >/dev/null 2>&1; then
+            echo "Release ${RELEASE_TAG} already exists, skipping."
+            exit 0
+          fi
           gh release create --repo auyer/pci-ids.rs --verify-tag ${PRERELEASE_FLAG} "${RELEASE_TAG}" --title "${RELEASE_TAG}"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
