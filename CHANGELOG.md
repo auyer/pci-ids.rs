@@ -6,6 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 <!-- @next-header@ -->
 
+## [1.2026.10] - 2026-10-12
+
+### Changed
+
+* First semi-automated version bump for this crate. Expect a monthly release cycle, if there are updates to the pciids database.
+* Update pciids snapshot to: 2026.10.09 (2026-10-09 03:15:02)
+
 ## [0.3.0] - 2026-10-04
 
 ### Changed
