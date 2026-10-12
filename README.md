@@ -1,9 +1,11 @@
 pci-ids-rs
 ==========
 
-This is a new maintained fork of [lienching/pci-ids.rs](https://github.com/lienching/pci-ids.rs),
-which in turn was modified from [woodruffw's usb-ids.rs](https://github.com/woodruffw/usb-ids.rs).
-Thanks to all previous authors.
+Cross-platform Rust wrappers for the [PCI ID Repository](https://pci-ids.ucw.cz/).
+
+This library bundles the PCI ID database, allowing platforms other than Linux to query it
+as a source of canonical PCI metadata. It is `#![no_std]` and works on any platform
+supported by Rust.
 
 ![license](https://img.shields.io/badge/license-MIT-blue)
 [![Build Status](https://img.shields.io/github/actions/workflow/status/auyer/pci-ids.rs/ci.yml?branch=main)](https://github.com/auyer/pci-ids.rs/actions?query=workflow%3ACI)
@@ -11,11 +13,13 @@ Thanks to all previous authors.
 [![docs.rs](https://docs.rs/pci-ids-rs/badge.svg)](https://docs.rs/pci-ids-rs)
 [![Debian package rust-pci-ids](https://img.shields.io/debian/v/rust-pci-ids/sid)](https://tracker.debian.org/pkg/rust-pci-ids)
 
-Cross-platform Rust wrappers for the [PCI ID Repository](https://pci-ids.ucw.cz/).
+This is a new maintained fork of [lienching/pci-ids.rs](https://github.com/lienching/pci-ids.rs),
+which in turn was modified from [woodruffw's usb-ids.rs](https://github.com/woodruffw/usb-ids.rs).
+Thanks to all previous authors.
 
-This library bundles the PCI ID database, allowing platforms other than Linux to query it
-as a source of canonical PCI metadata. It is `#![no_std]` and works on any platform
-supported by Rust.
+> Note: this fork is maintained with the help of CI automations that update the database from the upstream sources, and open pull requests.
+> This should mean a monthly release cycle, wherever there are changes to the database.
+> All changes are reviewed by the maintainer, and so is the decision to make a new release.
 
 ## Installation
 
