@@ -1,0 +1,75 @@
+name: Prepare Release
+on:
+  workflow_dispatch:
+    inputs:
+      version_comment:
+        description: 'Comments to add to release'
+        type: string
+        required: true
+
+
+permissions: {}
+
+jobs:
+  prepare-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # for create-pull-request
+      pull-requests: write # for create-pull-request
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Bump version
+        id: bump-version
+        run: |
+          echo "Current date is $(date). Bumping version:"
+          VERSION="$(bash scripts/bump-version.sh -a)"
+          echo "New version: ${VERSION}"
+          echo "VERSION=${VERSION}" >> "${GITHUB_OUTPUT}"
+
+      - name: Update Changelog
+        id: update-changelog
+        env:
+          VERSION: ${{ steps.bump-version.outputs.VERSION }}
+          VERSION_COMMENT: ${{ github.event.inputs.version_comment }}
+        run: |
+          DATE="$(date +%F)"
+          SNAPSHOT_VERSION="$(sed -n 's/^#\s*Version:\s*//p' src/pci.ids | head -n1 | tr -d '[:space:]')"
+          SNAPSHOT_DATE="$(sed -n 's/^#\s*Date:\s*//p' src/pci.ids | head -n1 | sed 's/[[:space:]]*$//')"
+
+          entry="$(mktemp)"
+          {
+            echo
+            echo "## [${VERSION}] - ${DATE}"
+            echo
+            echo "### Changed"
+            echo
+            while IFS= read -r line; do
+              line="$(printf '%s' "$line" | sed 's/^[[:space:]]*//; s/[[:space:]]*$//')"
+              if [ -n "$line" ]; then
+                echo "* ${line}"
+              fi
+            done <<< "${VERSION_COMMENT}"
+            echo "* Update pciids snapshot to: ${SNAPSHOT_VERSION} (${SNAPSHOT_DATE})"
+          } > "${entry}"
+
+          sed -i "/<!-- @next-header@ -->/r ${entry}" CHANGELOG.md
+          rm -f "${entry}"
+
+          echo "Updated CHANGELOG.md:"
+          git --no-pager diff -- CHANGELOG.md
+
+      - name: create PR
+        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
+        with:
+          commit-message: "Bump for release ${{ steps.bump-version.outputs.VERSION }}"
+          branch: preparing-release
+          title: "[CI] Preparing new release"
+          body: |
+            Updating version for new release:
+            ${{ steps.bump-version.outputs.VERSION }}
+            ${{ github.event.inputs.version_comment }}
+          assignees: "auyer"
+          reviewers: "auyer"
