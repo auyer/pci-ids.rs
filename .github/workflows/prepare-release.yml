@@ -1,5 +1,8 @@
 name: Prepare Release
 on:
+  push:
+    branches:
+      - version-bump-automation
   workflow_dispatch:
     inputs:
       version_comment:
