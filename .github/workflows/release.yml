@@ -10,11 +10,8 @@ permissions: {}
 jobs:
   plan-release:
     name: Plan release
-
     runs-on: ubuntu-slim
-
     permissions: {}
-
     outputs:
       release-tag: ${{ steps.determine-tag.outputs.RELEASE_TAG }}
 
