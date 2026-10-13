@@ -1,7 +1,7 @@
 name: check for updates to pci.ids
 on:
   schedule:
-    - cron: "0 12 * * *"
+    - cron: "0 12 * * 6" # At 12:00 on Saturday.
 
 permissions: {}
 
