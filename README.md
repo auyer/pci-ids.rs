@@ -27,7 +27,7 @@ Add the crate to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-pci-ids-rs = "1.2026.10"
+pci-ids-rs = "1.2026.11"
 ```
 
 Or, with `cargo`:
