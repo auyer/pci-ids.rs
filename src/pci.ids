@@ -1,8 +1,8 @@
 #
 #	List of PCI IDs
 #
-#	Version: 2026.11.06
-#	Date:    2026-11-06 03:15:02
+#	Version: 2026.11.14
+#	Date:    2026-11-14 03:15:02
 #
 #	Maintained by Albert Pool, Martin Mares, and other volunteers from
 #	the PCI ID Project at https://pci-ids.ucw.cz/.
@@ -4600,11 +4600,11 @@
 	9918  Trinity [Radeon HD 7600G]
 	9919  Trinity [Radeon HD 7500G]
 	991e  Bishop [Xbox One S APU]
-	9920  Liverpool [Playstation 4 APU]
+	9920  Liverpool [Starsha]
 	9921  Liverpool HDMI/DP Audio Controller
-	9922  Starshp
-	9923  Starsha2 [Kingston/Clayton]
-	9924  Gladius
+	9922  Liverpool+ [Starsha]
+	9923  Liverpool2 [Starsha2]
+	9924  Gladius [Roma]
 	9925  Kingston/Clayton/Jupiter/Gladius/Montego HDMI Controller
 	9926  Jupiter
 	9990  Trinity 2 [Radeon HD 7520G]
@@ -13672,6 +13672,7 @@
 	2681  AD102 [RTX TITAN Ada]
 	2684  AD102 [GeForce RTX 4090]
 	2685  AD102 [GeForce RTX 4090 D]
+	2687  AD102 [GeForce RTX 4080]
 	2689  AD102 [GeForce RTX 4070 Ti SUPER]
 	26af  AD102 [PG137]
 	26b1  AD102GL [RTX 6000 Ada Generation]
@@ -29441,7 +29442,7 @@
 1ed2  FuriosaAI, Inc.
 	0000  Warboy
 	0001  RNGD
-	0002  RNGD-Plus
+	0002  RNGD-P
 	2222  RNGD-S
 1ed3  Yeston
 1ed5  Moore Threads Technology Co.,Ltd
@@ -30453,6 +30454,8 @@
 		1ff2 0c11  10GE Ethernet Adapter 1160-2X
 	10a2  NIC1160 Ethernet Controller Virtual Function Family
 	10b1  NIC 1260 Ethernet Controller Family
+# NIC-ETH6Z0F-LP-2P 2x25GbE PCIe Network Adapter
+		193d 1037  NIC-ETH6Z0F-LP-2P
 	10b2  NIC 1260 Ethernet Controller Virtual Function Family
 	10b3  NIC 1260C Ethernet Controller Family
 	10b4  NIC 1260C Ethernet Controller Virtual Function Family
@@ -30764,6 +30767,8 @@
 20c0  ExpectedIT GmbH
 20c1  Suzhou Yige Technology Co., Ltd.
 	1234  YG Testchip
+# Vendor ID 20ca assigned by PCI-SIG.
+20ca  Hangzhou Hualan Microelectronique Co.,Ltd.
 20d0  Telin Semiconductor (Wuhan) Co., Ltd.
 	2001  PACIFIC-S1 NVMe SSD
 20d2  Awide Labs LTD.
@@ -30861,8 +30866,36 @@
 	0304  D35 Family [D3]
 	0305  D35 Family [HC3]
 2165  Dnotitia Inc.
+# Vendor ID 2167 assigned by PCI-SIG
+2167  Belling Yoroo Tech Co.. Ltd.
 # Baovix Technology Co., Ltd vendor ID=2178
 2178  Baovix Technology Co., Ltd
+	4000  M.2 Gen4 NVMe SSD
+	4200  N400 M.2 Gen4 NVMe SSD
+	5000  M.2 Gen4 NVMe SSD
+	5200  N500 M.2 Gen5 NVMe SSD
+	e400  U.2 Gen4 SSD
+	e410  U.2 Gen4 SSD
+	e500  U.2 Gen5 SSD
+	e510  U.2 Gen5 SSD
+	e520  U.2 Gen5 SSD
+	e600  U.2 Gen4 SSD
+	e660  U.2 Gen4 SSD
+	e800  U.2 Gen5 SSD
+	e820  U.2 Gen5 SSD
+	e830  U.2 Gen5 SSD
+217a  Huaxun Group Limited
+	0041  SharQ PCIE 4,0 1.92TB
+# PCIE 4.0 SSD 1.6TB
+	0042  PCIE 4.0 SSD 1.6TB
+	0512  SHARQ 005 1600GB
+	0513  SHARQ 005 1920GB
+	0514  SQ005 U.2 SSD 3.2TB
+	0515  SQ005 U.2 SSD 3.84TB
+	0516  SQ005 U.2 SSD 6.4TB
+	0517  SQ005 U.2 SSD 7.68TB
+	0518  SQ005 U.2 SSD 12.8TB
+	0519  SQ005 U.2 SSD 15.36TB
 21b4  Hunan Goke Microelectronics Co., Ltd
 21c3  21st Century Computer Corp.
 22b8  Flex-Logix Technologies
@@ -42847,7 +42880,9 @@ bdbd  Blackmagic Design
 	a137  DeckLink Studio 4K
 	a138  Decklink SDI 4K
 	a139  Intensity Pro 4K
+	a13a  Cintel Scanner
 	a13b  DeckLink Micro Recorder
+	a13c  Avid Artist DNxIO
 	a13d  DeckLink 4K Pro
 	a13e  UltraStudio 4K Extreme
 	a13f  DeckLink Quad 2
@@ -42856,9 +42891,29 @@ bdbd  Blackmagic Design
 	a142  UltraStudio HD Mini
 	a143  DeckLink Mini Recorder 4K
 	a144  DeckLink Mini Monitor 4K
+	a147  Avid Artist DNxIQ
 	a148  DeckLink SDI Micro
 	a14b  DeckLink 8K Pro
 	a14e  DeckLink Quad HDMI Recorder
+	a14f  UltraStudio 4K Mini
+	a150  Avid Artist DNxID
+	a154  UltraStudio Monitor 3G
+	a155  UltraStudio Recorder 3G
+	a158  DeckLink Mini Monitor HD
+	a159  DeckLink Mini Recorder HD
+	a15c  DeckLink IP HD
+	a15d  DeckLink IP HD Optical
+	a15e  DeckLink IP/SDI HD
+	a15f  DeckLink 8K Pro Mini
+	a160  Media Player 10G
+	a162  DeckLink IP 100G
+	a163  ATEM Mini Extreme ISO G2
+	a165  UltraStudio Mini Recorder 12G
+	a166  UltraStudio Mini Monitor 12G
+	a167  UltraStudio Mini Replay 12G
+	a170  UltraStudio Express Monitor 3G
+	a171  UltraStudio Express Recorder 3G
+	a172  UltraStudio Express HD
 	a1ff  eGPU RX580
 c001  TSI Telsys
 c0a9  Micron/Crucial Technology
