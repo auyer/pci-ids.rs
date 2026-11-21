@@ -1,8 +1,8 @@
 #
 #	List of PCI IDs
 #
-#	Version: 2026.11.06
-#	Date:    2026-11-06 03:15:02
+#	Version: 2026.11.21
+#	Date:    2026-11-21 03:15:02
 #
 #	Maintained by Albert Pool, Martin Mares, and other volunteers from
 #	the PCI ID Project at https://pci-ids.ucw.cz/.
@@ -168,6 +168,8 @@
 	0000  Propolis NVMe Controller
 	0001  Propolis xHCI Controller
 	0002  Propolis PCI-PCI Bridge
+	0003  Redhawk Communication Processor
+		01de fff7  Metro Baseboard
 # probably misprogrammed Intel Atom C2338 on Dell 0K8Y0N board
 0200  Dell (wrong ID)
 # 021b is not Compaq but there is a board misprogrammed
@@ -4600,11 +4602,11 @@
 	9918  Trinity [Radeon HD 7600G]
 	9919  Trinity [Radeon HD 7500G]
 	991e  Bishop [Xbox One S APU]
-	9920  Liverpool [Playstation 4 APU]
+	9920  Liverpool [Starsha]
 	9921  Liverpool HDMI/DP Audio Controller
-	9922  Starshp
-	9923  Starsha2 [Kingston/Clayton]
-	9924  Gladius
+	9922  Liverpool+ [Starsha]
+	9923  Liverpool2 [Starsha2]
+	9924  Gladius [Roma]
 	9925  Kingston/Clayton/Jupiter/Gladius/Montego HDMI Controller
 	9926  Jupiter
 	9990  Trinity 2 [Radeon HD 7520G]
@@ -5198,6 +5200,13 @@
 	1101  K8 [Athlon64/Opteron] Address Map
 	1102  K8 [Athlon64/Opteron] DRAM Controller
 	1103  K8 [Athlon64/Opteron] Miscellaneous Control
+	1105  Venice SP7 IOMMU
+	1106  Venice SP7 RCEC
+	1107  Venice SP7 PCIe Dummy Host Bridge
+	1108  Venice SP7 PCIe/CXL GPP Bridge
+	1109  Venice SP7 PCIe GPP Bridge
+	110a  Venice SP7 PCIe DDR-SSB Tunnel
+	110b  Venice SP7 Root Complex
 	1110  Krackan Internal PCIe GPP Bridge 0 to Bus A
 	1111  Krackan Internal PCIe GPP Bridge 0 to Bus B
 	1112  Krackan Internal PCIe GPP Bridge 0 to Bus C
@@ -5248,6 +5257,14 @@
 	124d  Krackan Data Fabric; Function 5
 	124e  Krackan Data Fabric; Function 6
 	124f  Krackan Data Fabric; Function 7
+	1278  Venice SP8 Data Fabric; Function 0
+	1279  Venice SP8 Data Fabric; Function 1
+	127a  Venice SP8 Data Fabric; Function 2
+	127b  Venice SP8 Data Fabric; Function 3
+	127c  Venice SP8 Data Fabric; Function 4
+	127d  Venice SP8 Data Fabric; Function 5
+	127e  Venice SP8 Data Fabric; Function 6
+	127f  Venice SP8 Data Fabric; Function 7
 	12b8  Strix Halo Data Fabric; Function 0
 	12b9  Strix Halo Data Fabric; Function 1
 	12ba  Strix Halo Data Fabric; Function 2
@@ -5264,6 +5281,14 @@
 	12c5  Turin Data Fabric; Function 5
 	12c6  Turin Data Fabric; Function 6
 	12c7  Turin Data Fabric; Function 7
+	12c8  Venice SP7 Data Fabric; Function 0
+	12c9  Venice SP7 Data Fabric; Function 1
+	12ca  Venice SP7 Data Fabric; Function 2
+	12cb  Venice SP7 Data Fabric; Function 3
+	12cc  Venice SP7 Data Fabric; Function 4
+	12cd  Venice SP7 Data Fabric; Function 5
+	12ce  Venice SP7 Data Fabric; Function 6
+	12cf  Venice SP7 Data Fabric; Function 7
 	12f8  Phoenix2 Data Fabric; Function 0
 	12f9  Phoenix2 Data Fabric; Function 1
 	12fa  Phoenix2 Data Fabric; Function 2
@@ -5525,6 +5550,7 @@
 	153c  Turin RCEC
 	153d  Turin PCIe Dummy Host Bridge
 	153e  Turin GPP Bridge
+		01de fff7  Metro Baseboard
 		01de fff8  Cosmo Baseboard
 	1540  Kryptos/Cato/Garfield/Garfield+/Arlene/Pooky HT Configuration
 	1541  Kryptos/Cato/Garfield/Garfield+/Arlene/Pooky Address Maps
@@ -5806,9 +5832,28 @@
 	1716  Family 12h/14h Processor Function 5
 	1718  Family 12h/14h Processor Function 6
 	1719  Family 12h/14h Processor Function 7
+	17d0  Venice Internal PCIe GPP Bridge to Bus [D:C]
+	17d1  Venice PCIe Dummy Function
+	17d2  Venice SP7 USB 3.2 xHCI
+	17d3  Venice PCIe Dummy Function
+	17d4  Venice Primary PCIe NTV/vNTB
+	17d5  Venice Secondary PCIe vNTB
+	17d6  Venice SDXI DACC
+	17d7  Venice NTB
+	17d8  Venice ASP
+	17d9  Venice SDXI DACC VF
 	17e0  Strix/Krackan/Strix Halo CCP/ASP
 	17f0  Strix/Krackan/Krackan2/Strix Halo Neural Processing Unit
 		17aa 3847  IdeaPad Slim 5 16AGP11
+	1b30  Venice SP8 Root Complex
+	1b31  Venice SP8 IOMMU
+	1b32  Venice SP8 RCEC
+	1b33  Venice SP8 PCIe Dummy Host Bridge
+	1b34  Venice SP8 PCIe/CXL GPP Bridge
+	1b35  Venice SP8 PCIe GPP Bridge
+	1b36  Venice SP8 PCIe DDR-SSB Tunnel
+	1b37  Venice Internal PCIe GPP Bridge to Bus [F:E]
+	1b38  Venie SP8 USB 3.2 xHCI
 	2000  79C97x [PCnet32 LANCE]
 		1014 2000  NetFinity 10/100 Fast Ethernet
 		1022 2000  PCnet - Fast 79C971
@@ -13670,8 +13715,10 @@
 	25fa  GA107 [RTX A2000 Embedded GPU]
 	25fb  GA107 [RTX A500 Embedded GPU]
 	2681  AD102 [RTX TITAN Ada]
+	2682  AD102 [GeForce RTX 4090 Ti]
 	2684  AD102 [GeForce RTX 4090]
 	2685  AD102 [GeForce RTX 4090 D]
+	2687  AD102 [GeForce RTX 4080]
 	2689  AD102 [GeForce RTX 4070 Ti SUPER]
 	26af  AD102 [PG137]
 	26b1  AD102GL [RTX 6000 Ada Generation]
@@ -19134,7 +19181,7 @@
 		1028 249b  MTFDMBQ7T6THM-2BP1DABDA
 		1028 249c  MTFDMBQ15T3THM-2BP1DABDA
 		1028 249d  MTFDMBQ30T7THM-2BP1DABDA
-	51ce  9650 PRO NVMe SSD
+	51ce  9650 MAX NVMe SSD
 		1028 2492  MTFDMBQ6T4THP-2BP1DFCDA
 		1028 2493  MTFDMBQ12T8THP-2BP1DFCDA
 		1028 2494  MTFDMBQ25T6THP-2BP1DFCDA
@@ -20901,6 +20948,71 @@
 	6888  T62100-6088 Unified Wire Ethernet Controller [VF]
 	6889  T62100-6089 Unified Wire Ethernet Controller [VF]
 	688a  T62100-608a Unified Wire Ethernet Controller [VF]
+	7001  T7250 Unified Wire Ethernet Controller
+	7002  S7250 Unified Wire Ethernet Controller
+	7003  T7450 Unified Wire Ethernet Controller
+	7004  S7450 Unified Wire Ethernet Controller
+	7005  T72200 Unified Wire Ethernet Controller
+	7006  S72200 Unified Wire Ethernet Controller
+	7007  T72200-FH Unified Wire Ethernet Controller
+	7008  S71400 Unified Wire Ethernet Controller
+	7009  S7210-BT Unified Wire Ethernet Controller
+	700d  S72200-OCP3 Unified Wire Ethernet Controller
+	700e  S7450-OCP3 Unified Wire Ethernet Controller
+	700f  S7410-BT-OCP3 Unified Wire Ethernet Controller
+	7010  S7210-BT-A Unified Wire Ethernet Controller
+	7401  T7250 Unified Wire Ethernet Controller
+	7402  S7250 Unified Wire Ethernet Controller
+	7403  T7450 Unified Wire Ethernet Controller
+	7404  S7450 Unified Wire Ethernet Controller
+	7405  T72200 Unified Wire Ethernet Controller
+	7406  S72200 Unified Wire Ethernet Controller
+	7407  T72200-FH Unified Wire Ethernet Controller
+	7408  S71400 Unified Wire Ethernet Controller
+	7409  S7210-BT Unified Wire Ethernet Controller
+	740d  S72200-OCP3 Unified Wire Ethernet Controller
+	740e  S7450-OCP3 Unified Wire Ethernet Controller
+	740f  S7410-BT-OCP3 Unified Wire Ethernet Controller
+	7410  S7210-BT-A Unified Wire Ethernet Controller
+	7501  T7250 Unified Wire Storage Controller
+	7502  S7250 Unified Wire Storage Controller
+	7503  T7450 Unified Wire Storage Controller
+	7504  S7450 Unified Wire Storage Controller
+	7505  T72200 Unified Wire Storage Controller
+	7506  S72200 Unified Wire Storage Controller
+	7507  T72200-FH Unified Wire Storage Controller
+	7508  S71400 Unified Wire Storage Controller
+	7509  S7210-BT Unified Wire Storage Controller
+	750d  S72200-OCP3 Unified Wire Storage Controller
+	750e  S7450-OCP3 Unified Wire Storage Controller
+	750f  S7410-BT-OCP3 Unified Wire Storage Controller
+	7510  S7210-BT-A Unified Wire Storage Controller
+	7601  T7250 Unified Wire Storage Controller
+	7602  S7250 Unified Wire Storage Controller
+	7603  T7450 Unified Wire Storage Controller
+	7604  S7450 Unified Wire Storage Controller
+	7605  T72200 Unified Wire Storage Controller
+	7606  S72200 Unified Wire Storage Controller
+	7607  T72200-FH Unified Wire Storage Controller
+	7608  S71400 Unified Wire Storage Controller
+	7609  S7210-BT Unified Wire Storage Controller
+	760d  S72200-OCP3 Unified Wire Storage Controller
+	760e  S7450-OCP3 Unified Wire Storage Controller
+	760f  S7410-BT-OCP3 Unified Wire Storage Controller
+	7610  S7210-BT-A Unified Wire Storage Controller
+	7801  T7250 Unified Wire Ethernet Controller [VF]
+	7802  S7250 Unified Wire Ethernet Controller [VF]
+	7803  T7450 Unified Wire Ethernet Controller [VF]
+	7804  S7450 Unified Wire Ethernet Controller [VF]
+	7805  T72200 Unified Wire Ethernet Controller [VF]
+	7806  S72200 Unified Wire Ethernet Controller [VF]
+	7807  T72200-FH Unified Wire Ethernet Controller [VF]
+	7808  S71400 Unified Wire Ethernet Controller [VF]
+	7809  S7210-BT Unified Wire Ethernet Controller [VF]
+	780d  S72200-OCP3 Unified Wire Ethernet Controller [VF]
+	780e  S7450-OCP3 Unified Wire Ethernet Controller [VF]
+	780f  S7410-BT-OCP3 Unified Wire Ethernet Controller [VF]
+	7810  S7210-BT-A Unified Wire Ethernet Controller [VF]
 	a000  PE10K Unified Wire Ethernet Controller
 1426  Storage Technology Corp.
 1427  Better On-Line Solutions
@@ -23257,13 +23369,16 @@
 	02a1  NVLink-8 Switch RMA
 	02a2  Spectrum-7 in Flash Recovery Mode
 	02a3  Spectrum-7 RMA
-# 400G Retimer
-	02a6  OrionR
+# Namechange
+	02a6  OrionR Flash Recovery
 	02a7  OrionR RMA
 # Spectrum-8 in Flash Recovery Mode
 	02a8  Spectrum-8 in Flash Recovery Mode
 # Spectrum-8 RMA
 	02a9  Spectrum-8 RMA
+# 400G DSP
+	02aa  OrionC Flash Recovery
+	02ab  OrionC RMA
 	1002  MT25400 Family [ConnectX-2 Virtual Function]
 	1003  MT27500 Family [ConnectX-3]
 		1014 04b5  PCIe3 40GbE RoCE Converged Host Bus Adapter for Power
@@ -23479,6 +23594,7 @@
 	b202  Arcus2
 	b203  Arcus3
 	b204  OrionR
+	b205  OrionC
 	c2d1  BlueField DPU Family Auxiliary Communication Channel [BlueField Family]
 	c2d2  MT416842 BlueField SoC management interfac
 	c2d3  MT42822 BlueField-2 SoC Management Interface
@@ -25826,6 +25942,7 @@
 	5028  PS5028-E28 PCIe5 NVMe Controller
 	5029  PS5029-E29T PCIe4 NVMe Controller (DRAM-less)
 	5031  PS5031-E31T PCIe5 NVMe Controller
+	5033  PS5033-E33T PCIe4 NVMe Controller
 	5037  PS5037-E37T PCIe5 NVMe Controller (DRAM-less)
 	5302  PS5302-X2 PCIe5 NVMe Controller
 1989  Montilio Inc.
@@ -26975,6 +27092,7 @@
 	7011  RX0xxx
 1bf5  Greenliant
 	1000  G7200 series U.2 NVMe SSD
+	e040  ArmourDrive NVMe SSD (DRAM-less)
 1bfc  Duagon AG
 1bfd  EeeTOP
 1c00  WCH (Nanjing Qinheng Microelectronics Co., Ltd.)
@@ -27390,6 +27508,7 @@
 	41c3  SM2P41C3 NVMe SSD (DRAM-less)
 	41c8  SM2P41C8 NVMe SSD (DRAM-less)
 	41d3  SM2P41D3 NVMe SSD (DRAM-less)
+	41d8  SM2P41D8Q NVMe SSD (DRAM-less)
 	5236  XPG GAMMIX S70 BLADE NVMe SSD
 	5350  XPG GAMMIX S50, S50 Lite NVMe SSD
 # PREMIUM NVMe SSD for PlayStation 5
@@ -29441,7 +29560,7 @@
 1ed2  FuriosaAI, Inc.
 	0000  Warboy
 	0001  RNGD
-	0002  RNGD-Plus
+	0002  RNGD-P
 	2222  RNGD-S
 1ed3  Yeston
 1ed5  Moore Threads Technology Co.,Ltd
@@ -30453,6 +30572,8 @@
 		1ff2 0c11  10GE Ethernet Adapter 1160-2X
 	10a2  NIC1160 Ethernet Controller Virtual Function Family
 	10b1  NIC 1260 Ethernet Controller Family
+# NIC-ETH6Z0F-LP-2P 2x25GbE PCIe Network Adapter
+		193d 1037  NIC-ETH6Z0F-LP-2P
 	10b2  NIC 1260 Ethernet Controller Virtual Function Family
 	10b3  NIC 1260C Ethernet Controller Family
 	10b4  NIC 1260C Ethernet Controller Virtual Function Family
@@ -30764,6 +30885,8 @@
 20c0  ExpectedIT GmbH
 20c1  Suzhou Yige Technology Co., Ltd.
 	1234  YG Testchip
+# Vendor ID 20ca assigned by PCI-SIG.
+20ca  Hangzhou Hualan Microelectronique Co.,Ltd.
 20d0  Telin Semiconductor (Wuhan) Co., Ltd.
 	2001  PACIFIC-S1 NVMe SSD
 20d2  Awide Labs LTD.
@@ -30861,8 +30984,36 @@
 	0304  D35 Family [D3]
 	0305  D35 Family [HC3]
 2165  Dnotitia Inc.
+# Vendor ID 2167 assigned by PCI-SIG
+2167  Belling Yoroo Tech Co.. Ltd.
 # Baovix Technology Co., Ltd vendor ID=2178
 2178  Baovix Technology Co., Ltd
+	4000  M.2 Gen4 NVMe SSD
+	4200  N400 M.2 Gen4 NVMe SSD
+	5000  M.2 Gen4 NVMe SSD
+	5200  N500 M.2 Gen5 NVMe SSD
+	e400  U.2 Gen4 SSD
+	e410  U.2 Gen4 SSD
+	e500  U.2 Gen5 SSD
+	e510  U.2 Gen5 SSD
+	e520  U.2 Gen5 SSD
+	e600  U.2 Gen4 SSD
+	e660  U.2 Gen4 SSD
+	e800  U.2 Gen5 SSD
+	e820  U.2 Gen5 SSD
+	e830  U.2 Gen5 SSD
+217a  Huaxun Group Limited
+	0041  SharQ PCIE 4,0 1.92TB
+# PCIE 4.0 SSD 1.6TB
+	0042  PCIE 4.0 SSD 1.6TB
+	0512  SHARQ 005 1600GB
+	0513  SHARQ 005 1920GB
+	0514  SQ005 U.2 SSD 3.2TB
+	0515  SQ005 U.2 SSD 3.84TB
+	0516  SQ005 U.2 SSD 6.4TB
+	0517  SQ005 U.2 SSD 7.68TB
+	0518  SQ005 U.2 SSD 12.8TB
+	0519  SQ005 U.2 SSD 15.36TB
 21b4  Hunan Goke Microelectronics Co., Ltd
 21c3  21st Century Computer Corp.
 22b8  Flex-Logix Technologies
@@ -34372,15 +34523,36 @@
 	189a  Ethernet Connection E822-L 1GbE
 	18a0  Atom Processor P5xxx Series QAT
 	18a1  C4XXX Series QAT Virtual Function
+	18a2  Ice Lake-D PCH PCIe Cluster 2 Root Port 11
+	18a4  Ice Lake-D PCH PCIe Cluster 0 Root Port 0
+	18a5  Ice Lake-D PCH PCIe Cluster 0 Root Port 1
+	18a6  Ice Lake-D PCH PCIe Cluster 0 Root Port 2
+	18a7  Ice Lake-D PCH PCIe Cluster 0 Root Port 3
+	18a8  Ice Lake-D PCH PCIe Cluster 1 Root Port 4
+	18a9  Ice Lake-D PCH PCIe Cluster 1 Root Port 5
+	18aa  Ice Lake-D PCH PCIe Cluster 1 Root Port 6
+	18ab  Ice Lake-D PCH PCIe Cluster 1 Root Port 7
+	18ac  Ice Lake-D Host SMBus Controller
+	18ad  Ice Lake-D PCH PCIe Cluster 2 Root Port 8
+	18ae  Ice Lake-D PCH PCIe Cluster 2 Root Port 9
+	18af  Ice Lake-D PCH PCIe Cluster 2 Root Port 10
 	18b3  Atom Processor P5xxx Series SATA Controller
 	18d0  Atom Processor P5xxx Series USB xHCI Controller
 	18d3  Atom Processor P5xxx Series MEI Controller
+	18d4  Ice Lake-D MEI Controller
 	18d6  Atom Processor P5xxx Series MEI Controller
+	18d8  Ice Lake-D HSUART
+	18da  Ice Lake-D Virtual Root Port for Intel QAT
+	18db  Ice Lake-D eMMC Controller
+	18dc  Ice Lake-D LPC/eSPI Controller
+	18dd  Ice Lake-D PCH Bridge Control
+	18de  Ice Lake-D PMC
 	18df  Atom Processor P5xxx Series SMBus Controller
 	18e0  Atom Processor P5xxx Series SPI Controller
 	18e1  Atom Processor P5xxx Series Trace Hub
 	18ee  200xx Series QAT
 	18ef  200xx Series QAT Virtual Function
+	18f2  Ice Lake-D SATA Controller
 	18f3  Atom Processor P5xxx Series SATA Controller
 	1900  Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Host Bridge/DRAM Registers
 	1901  6th-10th Gen Core Processor PCIe Controller (x16)
@@ -38127,6 +38299,7 @@
 	345c  Ice Lake PCU Registers
 	345d  Ice Lake PCU Registers
 	345e  Ice Lake PCU Registers
+	345f  Ice Lake PCU Registers
 	347a  Ice Lake PCI Express Root Port A
 	347b  Ice Lake PCI Express Root Port B
 	347c  Ice Lake PCI Express Root Port C
@@ -42847,7 +43020,9 @@ bdbd  Blackmagic Design
 	a137  DeckLink Studio 4K
 	a138  Decklink SDI 4K
 	a139  Intensity Pro 4K
+	a13a  Cintel Scanner
 	a13b  DeckLink Micro Recorder
+	a13c  Avid Artist DNxIO
 	a13d  DeckLink 4K Pro
 	a13e  UltraStudio 4K Extreme
 	a13f  DeckLink Quad 2
@@ -42856,9 +43031,29 @@ bdbd  Blackmagic Design
 	a142  UltraStudio HD Mini
 	a143  DeckLink Mini Recorder 4K
 	a144  DeckLink Mini Monitor 4K
+	a147  Avid Artist DNxIQ
 	a148  DeckLink SDI Micro
 	a14b  DeckLink 8K Pro
 	a14e  DeckLink Quad HDMI Recorder
+	a14f  UltraStudio 4K Mini
+	a150  Avid Artist DNxID
+	a154  UltraStudio Monitor 3G
+	a155  UltraStudio Recorder 3G
+	a158  DeckLink Mini Monitor HD
+	a159  DeckLink Mini Recorder HD
+	a15c  DeckLink IP HD
+	a15d  DeckLink IP HD Optical
+	a15e  DeckLink IP/SDI HD
+	a15f  DeckLink 8K Pro Mini
+	a160  Media Player 10G
+	a162  DeckLink IP 100G
+	a163  ATEM Mini Extreme ISO G2
+	a165  UltraStudio Mini Recorder 12G
+	a166  UltraStudio Mini Monitor 12G
+	a167  UltraStudio Mini Replay 12G
+	a170  UltraStudio Express Monitor 3G
+	a171  UltraStudio Express Recorder 3G
+	a172  UltraStudio Express HD
 	a1ff  eGPU RX580
 c001  TSI Telsys
 c0a9  Micron/Crucial Technology
